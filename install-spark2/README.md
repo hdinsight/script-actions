@@ -13,6 +13,13 @@ Non-working Components: Jupyter, livy (interactive)
 2. Run script action: `install-spark2-v01.sh` on this cluster. 
 
     Go to Azure portal > open cluster blade > open Script Actions tile > click Submit new and follow instructions. The script action is provided in this repository.
+    
+    When you are on the "Submit script action" blade, you will see "Bash script URI" field. You need to make sure that the `install-spark2-v01.sh` is stored in an Azure Storage Blob, and make the link public.
+    
+    OR
+    
+    You can just add https://raw.githubusercontent.com/hdinsight/script-actions/master/install-spark2/install-spark2-v01.sh to "Bash script URI".
+    
 3. Update class path in the cluster configuration. 
 
     Open Ambari portal of the cluster, go to Spark > Configs > Advanced spark-env and update SPARK_DIST_CLASSPATH variable to the following value:
