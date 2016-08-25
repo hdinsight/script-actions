@@ -22,7 +22,6 @@ mv "$newspark" "$SPARK_DIR"
 sudo ln -s "$SPARK_DIR/yarn/spark-2.0.0-yarn-shuffle.jar" \
    "$HADOOP_DIR/lib/spark-yarn-shuffle.jar"
 sudo ln -s $HADOOP_DIR /usr/hdp/current/hadoop
-sudo mkdir /usr/hdp/current/hadoop-yarn
 sudo ln -s $HADOOP_YARN_DIR /usr/hdp/current/hadoop-yarn   
 
 echo "Spark 2.0 installation completed"
