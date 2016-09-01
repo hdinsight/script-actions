@@ -19,7 +19,7 @@ rm -r "$SPARK_DIR"
 mv "$newspark" "$SPARK_DIR"
 
 # Create symlinks
-sudo ln -s "$SPARK_DIR/yarn/spark-2.0.0-yarn-shuffle.jar" \
+sudo ln -sfn "$SPARK_DIR/yarn/spark-2.0.0-yarn-shuffle.jar" \
    "$HADOOP_DIR/lib/spark-yarn-shuffle.jar"
 sudo ln -s $HADOOP_DIR /usr/hdp/current/hadoop
 sudo ln -s $HADOOP_YARN_DIR /usr/hdp/current/hadoop-yarn   
