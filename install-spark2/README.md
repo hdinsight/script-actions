@@ -4,6 +4,7 @@ Script action to install Spark 2.0 on top of HDInsight Spark 1.6.x cluster (for 
 This script action is limited at the moment only to basic Spark services in command line. 
 
 **Working Components**: livy (jar submission), spark-sql, pyspark, spark-submit, spark-shell 
+
 **Non-working Components**: Jupyter, livy (interactive)
 
 ## Installation instructions
