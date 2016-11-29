@@ -312,6 +312,10 @@ validateUsernameAndPassword
 #echo "end validateUsernameAndPassword"
 
 #echo "begin stopServiceViaRest"
+stopServiceViaRest SPARK
+#echo "end stopServiceViaRest"
+
+#echo "begin stopServiceViaRest"
 stopServiceViaRest MAPREDUCE2
 #echo "end stopServiceViaRest"
 
@@ -347,6 +351,7 @@ updateApacheSparkConfig;
 startServiceViaRest HDFS
 startServiceViaRest YARN
 startServiceViaRest MAPREDUCE2
+startServiceViaRest SPARK
 #echo "completed"
 
 # restart ambari agent and server
