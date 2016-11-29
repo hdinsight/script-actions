@@ -352,6 +352,11 @@ updateAmbariConfigs;
 updateApacheSparkConfig;
 #echo "end updateApacheSparkConfig"
 
+
+#echo "begin startApacheIgnite"
+startApacheIgnite
+#echo "end startApacheIgnite"
+
 #echo "start service rest"
 startServiceViaRest HDFS
 startServiceViaRest YARN
@@ -360,11 +365,7 @@ startServiceViaRest SPARK
 #echo "completed"
 
 # restart ambari agent and server
-service ambari-server restart
-service ambari-agent restart
-
-#echo "begin startApacheIgnite"
-startApacheIgnite
-#echo "end startApacheIgnite"
+# service ambari-server restart
+# service ambari-agent restart
 
 echo "Apache Ignite installation completed"
