@@ -299,6 +299,11 @@ startApacheIgnite(){
 	echo "starting Apache Ignite in background"
 	export HADOOP_HOME="/usr/hdp/current/hadoop-client"
 	nohup bin/ignite.sh &
+	sleep 2
+	ignitepid=`ps -ef | grep ignite | grep default-config.xml | awk '{print $2}'`
+	if [ ! -z "$ignitepid" ]; then
+		echo "Apache Ignite instance started successfully: $ignitepid"
+	fi
 }
 ####################################################################
 
@@ -355,11 +360,11 @@ startServiceViaRest SPARK
 #echo "completed"
 
 # restart ambari agent and server
-service ambari-agent restart
 service ambari-server restart
+service ambari-agent restart
 
 #echo "begin startApacheIgnite"
 startApacheIgnite
 #echo "end startApacheIgnite"
 
-exit $?
+echo "Apache Ignite installation completed"
