@@ -3,7 +3,9 @@ This script installs [Apache Ignite](www.ignite.apache.org) on an HDInsight clus
 
 The cluster is designed to run as a [ScriptAction](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-script-actions).
 
-Running the script as a ScriptAction or is simple, all you need to do is passing its URL to the script action, no need to submit any arguments. **THE SCRIPT MUST BE RUN ON HEAD AND WORKER NODES**
+Running the script as a ScriptAction or is simple, all you need to do is passing its URL to the script action, no need to submit any arguments. 
+
+Note: **THE SCRIPT MUST BE RUN ON HEAD AND WORKER NODES**
 
 # What does it do in background?
 The script retrieves the following information:
