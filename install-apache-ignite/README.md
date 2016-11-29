@@ -3,10 +3,11 @@ This script installs [Apache Ignite](www.ignite.apache.org) on an HDInsight clus
 
 The cluster is designed to run as a [ScriptAction](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-script-actions).
 
-Running the script as a ScriptAction or manually is simple, all you need to do is passing its URL to the script action, no need to submit any arguments.
+Running the script as a ScriptAction or is simple, all you need to do is passing its URL to the script action, no need to submit any arguments. **THE SCRIPT MUST BE RUN ON HEAD AND WORKER NODES**
 
 # What does it do in background?
 The script retrieves the following information:
+
 1. The Ambari Admin username 
 2. The Ambari Admin password
   - The Ambari Admin name & password are needed to automatically push Ignite's configuration into HDFS **`core-site.xml`** via Ambari's **`config.sh`** command.
