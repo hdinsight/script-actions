@@ -28,9 +28,9 @@ The script retrieves the following information:
   ```
   ps -aef | grep default-config.xml
   ```
-  - This should list the Ignite process taht's using the updated default configurstion. 
+  1. This should list the Ignite process taht's using the updated default configurstion. 
 2. Check the Ambari HDFS configuration by searching for `igfs`
-  - This should list **2 properties added to _HDFS core-site.xml_** 
+  1. This should list **2 properties added to _HDFS core-site.xml_** 
 3. Using HDFS commands:
   1. Browse your blob storage using prefix:
     ```
