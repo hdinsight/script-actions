@@ -28,7 +28,7 @@ This script action is limited at the moment only to basic Spark services in comm
     export SPARK_DIST_CLASSPATH=$SPARK_DIST_CLASSPATH:/usr/hdp/current/spark-historyserver/conf/:/usr/hdp/current/spark2-client/jars/datanucleus-api-jdo-3.2.6.jar:/usr/hdp/current/spark2-client/jars/datanucleus-rdbms-3.2.9.jar:/usr/hdp/current/spark2-client/jars/datanucleus-core-3.2.10.jar:/etc/hadoop/conf/:/usr/lib/hdinsight-datalake/*:/usr/hdp/current/hadoop-client/hadoop-azure.jar:/usr/hdp/current/hadoop-client/lib/azure-storage-4.2.0.jar:/usr/lib/hdinsight-logging/mdsdclient-1.0.jar:/usr/lib/hdinsight-logging/microsoft-log4j-etwappender-1.0.jar:/usr/lib/hdinsight-logging/json-simple-1.1.jar:/usr/hdp/current/hadoop-client/client/slf4j-log4j12.jar:/usr/hdp/current/hadoop/client/slf4j-api.jar:/usr/hdp/current/hadoop/hadoop-common.jar:/usr/hdp/current/hadoop-client/hadoop-azure.jar:/usr/hdp/current/hadoop-client/client/log4j.jar:/usr/hdp/current/hadoop-client/client/commons-configuration-1.6.jar:/usr/hdp/current/hadoop-client/lib/*:/usr/hdp/current/hadoop-client/client/*:/usr/hdp/current/spark2-client/conf/:/usr/hdp/current/hadoop-yarn-client/hadoop-yarn-server-web-proxy.jar:/usr/hdp/current/spark2-client/jars/spark-yarn_2.11-2.1.0.jar:/usr/hdp/current/spark2-client/jars/*:
 	```
    
-4. <Not validated step> Add `spark.yarn.jars` update on spark-thrift-sparkconf. 
+4. `TODO:Not validated step, looks it's not nessesary` Add `spark.yarn.jars` update on spark-thrift-sparkconf. 
  
     Open Ambari portal of the cluster, go to Spark > Configs > Custom spark-thrift-sparkconf.
 	
