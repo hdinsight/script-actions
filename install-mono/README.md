@@ -8,8 +8,8 @@ The script will uninstall any existing versions of Mono, if different from the o
 
 ## Installed Packages
 The following packages are installed:
-1. mono-complete
-2. ca-certificates-mono
+* mono-complete
+* ca-certificates-mono
 
 ## Installation instructions
 
@@ -30,8 +30,8 @@ The following packages are installed:
     The script installs version 4.8.1 by default.
     If a custom Mono version is required, users can pass in the version number as the first argument to the script.
     Example: 
-      a. install-mono.sh 4.8.0
-      b. install-mono.sh 5.0.1
+      * install-mono.sh 4.8.0
+      * install-mono.sh 5.0.1
 
    The version passed in must be present on the following page, as an available version. Else the script will fail.
    https://download.mono-project.com/repo/debian/dists/wheezy/snapshots/

@@ -1,12 +1,15 @@
 #!/bin/bash
 
 ##################################################################
-# Custom action script to install/upgrade Mono (
+# Custom action script to install/upgrade Mono
 #  a. Remove any existing version of Mono installed on a node
 #  b. Install specified versioni of Mono (http://www.mono-project.com) on a HDInsight cluster's Node.
 ##################################################################
 
 set -e
+
+# Note: Mono version will default to 4.8
+declare MONO_VERSION="4.8.1"
 
 log(){
     local message="${1}"
@@ -43,9 +46,6 @@ if [ "$(id -u)" != "0" ]; then
     log  "This script is supposed to be invoked as root."
     exit 1
 fi
-
-# Note: Mono version will default to 4.8
-declare MONO_VERSION="4.8.0"
 
 # Note: It is expected that user's supplying Mono versions validated the version
 # exists under http://download.mono-project.com/repo/debian/wheezy/snapshots folder.
