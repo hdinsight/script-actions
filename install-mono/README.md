@@ -8,8 +8,8 @@ The script will uninstall any existing versions of Mono, if different from the o
 
 ## Installed Packages
 The following packages are installed:
- mono-complete
- ca-certificates-mono
+1. mono-complete
+2. ca-certificates-mono
 
 ## Installation instructions
 
