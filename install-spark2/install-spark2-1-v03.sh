@@ -10,7 +10,7 @@ HADOOP_YARN_DIR="$CURRENT_DIR/hadoop-yarn"
 
 ## Download & Install Binary
 cd "/tmp"
-curl "https://www.apache.org/dist/spark/spark-2.1.0/$newspark.tgz" | tar xzf -
+curl "https://www.apache.org/dist/spark/spark-2.1.1/$newspark.tgz" | tar xzf -
 cd "$newspark"
 rm -r "jars/hadoop"* "conf"
 ln -s "$SPARK_CONF_DIR" "conf"
@@ -19,9 +19,9 @@ rm -r "$SPARK_DIR"
 mv "$newspark" "$SPARK_DIR"
 
 # Create symlinks
-sudo ln -sfn "$SPARK_DIR/yarn/spark-2.1.0-yarn-shuffle.jar" \
+sudo ln -sfn "$SPARK_DIR/yarn/spark-2.1.1-yarn-shuffle.jar" \
    "$HADOOP_DIR/lib/spark-yarn-shuffle.jar"
 sudo ln -sf $HADOOP_DIR /usr/hdp/current/hadoop
 sudo ln -sf $HADOOP_YARN_DIR /usr/hdp/current/hadoop-yarn   
 
-echo "Spark 2.1 installation completed"
+echo "Spark 2.1.1 installation completed"
