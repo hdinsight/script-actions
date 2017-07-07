@@ -1,4 +1,4 @@
-# hdinsight-spark2.1-script-action
+# hdinsight-spark2.1.1-script-action
 Script action to install Spark 2.1.1 on top of HDInsight Spark 2.1.0 cluster (for development and experimental purposes).
 
 This script action is limited at the moment only to basic Spark services in command line. 
