@@ -1,5 +1,5 @@
 # hdinsight-spark2.2-script-action
-Script action to install Spark 2.2 on top of HDInsight Spark 2.0.x cluster (for development and experimental purposes).
+Script action to install Spark 2.2 on top of HDInsight Spark 2.1.x cluster (for development and experimental purposes).
 
 This script action is limited at the moment only to basic Spark services in command line. 
 
@@ -9,12 +9,13 @@ This script action is limited at the moment only to basic Spark services in comm
 
 ## Installation instructions
 
-1. Create HDInsight Spark cluster version 3.6 (Spark 2.1.0)
+1. Create HDInsight Spark cluster version 3.6 (Spark 2.1.1)
+
 2. Run script action: `install-spark2-2-v01.sh` on this cluster. 
 
     Go to Azure portal > open cluster blade > open Script Actions tile > click Submit new and follow instructions. The script action is provided in this repository.
     
-    When you are on the "Submit script action" blade, you will see "Bash script URI" field. You need to make sure that the `install-spark2-1-v03.sh` is stored in an Azure Storage Blob, and make the link public.
+    When you are on the "Submit script action" blade, you will see "Bash script URI" field. You need to make sure that the `install-spark2-2-v01.sh` is stored in an Azure Storage Blob, and make the link public.
     
     OR
     
@@ -30,4 +31,5 @@ This script action is limited at the moment only to basic Spark services in comm
    
 4. Restart affected Ambari services.
     
-5. Now you are ready to use Spark 2.1 on the cluster. In ssh session launch `spark-shell`, `spark-submit`, etc.
+6. Now you are ready to use Spark 2.2 on the cluster. In ssh session launch `spark-shell`, `spark-submit`, etc.
+
