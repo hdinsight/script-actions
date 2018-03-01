@@ -11,12 +11,12 @@ HADOOP_YARN_DIR="$CURRENT_DIR/hadoop-yarn"
 ## Download & Install Binary
 cd "/tmp"
 curl "http://apache.claz.org/spark/$newspark/$newspark-bin-hadoop2.7.tgz" | tar xzf -
-cd "$newspark"
+cd "$newspark-bin-hadoop2.7"
 rm -r "jars/hadoop"* "conf"
 ln -s "$SPARK_CONF_DIR" "conf"
 cd ..
 rm -r "$SPARK_DIR"
-mv "$newspark" "$SPARK_DIR"
+mv "$newspark-bin-hadoop2.7" "$SPARK_DIR"
 
 # Create symlinks
 sudo ln -sfn "$SPARK_DIR/yarn/$newspark-yarn-shuffle.jar" \
