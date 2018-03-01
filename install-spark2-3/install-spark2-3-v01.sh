@@ -10,7 +10,7 @@ HADOOP_YARN_DIR="$CURRENT_DIR/hadoop-yarn"
 
 ## Download & Install Binary
 cd "/tmp"
-curl "https://www.apache.org/dyn/closer.lua/spark/spark-2.3.0/$newspark-bin-hadoop2.7.tgz" | tar xzf -
+curl "http://apache.claz.org/spark/$newspark/$newspark-bin-hadoop2.7.tgz" | tar xzf -
 cd "$newspark"
 rm -r "jars/hadoop"* "conf"
 ln -s "$SPARK_CONF_DIR" "conf"
