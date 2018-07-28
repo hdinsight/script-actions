@@ -26,7 +26,7 @@ install_jar() {
                 exit 1
             fi
 
-            echo "Copy completed. Going to restart Spark service."
+            echo "Copy completed."
             break
         done
     else    
@@ -49,7 +49,7 @@ restart_spark_service() {
     STATUSCODE=400
     until [ $STATUSCODE -le 202 ] || [ $n -gt 3 ]
     do
-        STATUSCODE=$(sudo curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X PUT -d '{"RequestInfo": {"context": "Stop Spark2"}, "ServiceInfo": {"state": "INSTALLED"}}' --silent --write-out %{http_code} --output /dev/restartshslog.txt https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/SPARK2)
+        STATUSCODE=$(sudo curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X PUT -d '{"RequestInfo": {"context": "Stop Spark2"}, "ServiceInfo": {"state": "INSTALLED"}}' --silent --write-out %{http_code} --output /dev/restartshslog.txt https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/SPARK2/components/SPARK2_JOBHISTORYSERVER)
         if test $STATUSCODE -le 202; then
             break
         else
@@ -68,7 +68,7 @@ restart_spark_service() {
     STATUSCODE=400
     until [ $STATUSCODE -le 202 ] || [ $n -gt 3 ]
     do
-        STATUSCODE=$(sudo curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X PUT -d '{"RequestInfo": {"context": "Start Spark2"}, "ServiceInfo": {"state": "STARTED"}}' --silent --write-out %{http_code} --output /dev/restartshslog.txt https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/SPARK2)
+        STATUSCODE=$(sudo curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X PUT -d '{"RequestInfo": {"context": "Start Spark2"}, "ServiceInfo": {"state": "STARTED"}}' --silent --write-out %{http_code} --output /dev/restartshslog.txt https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/SPARK2/components/SPARK2_JOBHISTORYSERVER )
         if test $STATUSCODE -le 202; then
             break
         else
@@ -88,7 +88,9 @@ jar_path=$1
 
 if ls ${jars_folder}/spark-enhancement*.jar 1>/dev/null 2>&1; then
     install_jar "$jars_folder" "$jar_path"
-    restart_spark_service
+    if hostname | grep "hn0" 1>/dev/null 2>&1; then
+        restart_spark_service
+    fi
 else
     >&2 echo "There is no target jar on this node. Exit with no action."
     exit 0
