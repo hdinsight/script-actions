@@ -14,3 +14,5 @@ Execute [install-data-analytics-studio.sh](install-data-analytics-studio.sh) on 
 If you wish to run the script using a custom script action, follow [this](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux). Make sure to execute the script action on head nodes.
 After the script succeeds, head to ambari view and refresh. On the left panel observe a new service: ```Data Analytics Studio```.
 Use the Quick Links to navigate to the UI, or append /das/ at the end of the cluster name, e.g https://clustername.azurehdinsight.net/das/
+
+Note: Data Analytics studio today does not support high availability. As a result, if the node on which it is installed goes down, the Data analytics Studio service won't be accessible.
