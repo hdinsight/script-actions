@@ -27,9 +27,9 @@ TAG=$(cat /proc/sys/kernel/random/uuid)
 set +e
 if [ -z "$(curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" --silent -X GET https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/HIVE | grep HIVE_SERVER_INTERACTIVE)" ]
 then
-    LLAP=true
-else
     LLAP=false
+else
+    LLAP=true
 fi
 set -e
 echo "Interactive hive mode: $LLAP"
