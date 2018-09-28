@@ -2,7 +2,7 @@
 ### Instructions to install Data Analytics Studio on HDI  4.0
 
 #### Prerequisites
-1. A precreated HDI 4 cluster with hive component.
+1. A precreated HDI 4 cluster containing hive component.
 2. Make sure the tez configs(tez-site) have been modified to include ```tez.history.logging.proto-base-dir=/warehouse/tablespace/external/hive/sys.db```
 Restart Tez after modifying the configuration.
 3. Make sure the hive configs(hive-site) have been modified to include 
