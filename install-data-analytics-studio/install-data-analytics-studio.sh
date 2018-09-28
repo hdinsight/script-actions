@@ -57,9 +57,12 @@ curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X PUT -d '{ "Clusters" :
 curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X PUT -d '{ "Clusters" : {"desired_configs": {"type": "data_analytics_studio-security-site", "tag" : "$TAG" }}}'  https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME
 curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X PUT -d '{ "Clusters" : {"desired_configs": {"type": "data_analytics_studio-env", "tag" : "$TAG" }}}'  https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME
 #assign hosts
-NODENAME=$(curl -u $USERID:$PASSWD --silent -H "X-Requested-By: ambari" -X GET https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/hosts | grep -i $HOSTNAME | grep -i "host_name" | grep -o $HOSTNAME.*net)
-curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X POST -d '{"host_components" : [{"HostRoles":{"component_name":"DATA_ANALYTICS_STUDIO_WEBAPP"}}] }'  https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/hosts?Hosts/host_name=$NODENAME
-curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X POST -d '{"host_components" : [{"HostRoles":{"component_name":"DATA_ANALYTICS_STUDIO_EVENT_PROCESSOR"}}] }'  https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/hosts?Hosts/host_name=$NODENAME
+NODENAME1=$(curl -u $USERID:$PASSWD --silent -H "X-Requested-By: ambari" -X GET https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/hosts | grep -i hn0 | grep -i "host_name" | grep -o hn0.*net)
+curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X POST -d '{"host_components" : [{"HostRoles":{"component_name":"DATA_ANALYTICS_STUDIO_WEBAPP"}}] }'  https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/hosts?Hosts/host_name=$NODENAME1
+curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X POST -d '{"host_components" : [{"HostRoles":{"component_name":"DATA_ANALYTICS_STUDIO_EVENT_PROCESSOR"}}] }'  https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/hosts?Hosts/host_name=$NODENAME1
+NODENAME2=$(curl -u $USERID:$PASSWD --silent -H "X-Requested-By: ambari" -X GET https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/hosts | grep -i hn1 | grep -i "host_name" | grep -o hn1.*net)
+curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X POST -d '{"host_components" : [{"HostRoles":{"component_name":"DATA_ANALYTICS_STUDIO_WEBAPP"}}] }'  https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/hosts?Hosts/host_name=$NODENAME2
+curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X POST -d '{"host_components" : [{"HostRoles":{"component_name":"DATA_ANALYTICS_STUDIO_EVENT_PROCESSOR"}}] }'  https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/hosts?Hosts/host_name=$NODENAME2
 #start service
 curl -u $USERID:$PASSWD -H "X-Requested-By: ambari" -i -X PUT -d '{"ServiceInfo": {"state" : "INSTALLED"}, "RequestInfo": {"context": "Install Data Analytics Studio"}}' https://$CLUSTERNAME.azurehdinsight.net/api/v1/clusters/$CLUSTERNAME/services/DATA_ANALYTICS_STUDIO
 
