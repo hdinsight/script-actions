@@ -9,7 +9,7 @@ then
 else
     echo "${HOSTNAME}: Ambari is running. Proceed ahead."
 fi
-sudo echo "deb http://s3.amazonaws.com/dev.hortonworks.com/DAS/ubuntu16/1.x/BUILDS/1.0.1.1-13 DAS main" > /etc/apt/sources.list.d
+sudo echo "deb http://s3.amazonaws.com/dev.hortonworks.com/DAS/ubuntu16/1.x/BUILDS/1.0.1.1-13 DAS main" > /etc/apt/sources.list.d/das.list
 sudo apt-get update && sudo /usr/bin/apt-get -o Dpkg::Options::=--force-confdef --allow-unauthenticated --assume-yes install data-analytics-studio-lite
 wget http://s3.amazonaws.com/dev.hortonworks.com/DAS/ubuntu16/1.x/BUILDS/1.0.1.1-13/tars/data_analytics_studio_lite/data-analytics-studio-mpack-1.0.1.1.0.1.1-13.tar.gz -O /tmp/data-analytics-studio-mpack.tar.gz
 sudo ambari-server install-mpack --mpack=/tmp/data-analytics-studio-mpack.tar.gz
