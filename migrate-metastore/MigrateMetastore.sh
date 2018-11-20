@@ -44,20 +44,23 @@ Mandatory Arguments. Each one of these arguments must be provided:
 
 -cs|--containersrc                  A comma-separated list of the containers corresponding to the
                                     entries to be migrated. Example: c1,c2,c3. Use the character 
-                                    '%' to select all containers.
+                                    '%' to select all containers. No more than 10 containers may
+                                    be selected in one execution.
 
 -as|--accountsrc                    A comma-separated list of the account names corresponding to 
                                     the entries to be migrated. Example: a1,a2,a3. Provide only 
                                     the names of the accounts: there is no need to provide the
                                     complete account endpoint. Use the character '%' to select 
-                                    all account names.
+                                    all account names. No more than 10 accounts may be selected
+                                    in one execution.
 
 -ps|--pathsrc                       A comma-separated list of the paths corresponding to the 
                                     entries to be migrated. Example: 
                                     warehouse,hive/tables,ext/tables/hive. Provide only the 
                                     names of the paths: there is no need to provide the '/' 
                                     character before and after the path. Use the character '%' 
-                                    to select all paths.
+                                    to select all paths. No more than 10 paths may be selected
+                                    in one execution.
 
 
 Optional Arguments. Any combination of these arguments is a valid input. 
@@ -106,6 +109,8 @@ EXIT_BAD_ARGS=50
 EXIT_NO_CHANGE=75
 EXIT_DRY_RUN=100
 
+MAX_ARG_COUNT=10
+
 WhereClauseString='*://*@*/*/%' # Type://Container@Account/Directory/Table
 UpdateTemplate="update LocationUpdate set * = ('#'); "
 UpdateCommands=''
@@ -138,6 +143,7 @@ launchBeelineCommand()
         code=$?
         echo "Beeline command failed with exit code ${?}"
         echo "Command executed was ${beelineCmd}"
+        echo "Closing."
         exit ${EXIT_BEELINE_FAIL}
     fi
 }
@@ -145,6 +151,7 @@ launchBeelineCommand()
 usage() 
 {
     echo "$InfoString"
+    echo "$1"
     exit ${EXIT_BAD_ARGS}
 }
 
@@ -224,11 +231,11 @@ do
         shift
         ;;
         -h|--help)
-        usage
+        usage "Help flag entered. Closing."
         ;;
 
         *)
-        usage
+        usage "Unsupported flag entered. Closing."
         ;;
 esac
 done
@@ -240,7 +247,7 @@ if [ -z "${Username}" ] || [ -z "${Password}" ] || [ -z "${Server}" ] || [ -z "$
 [ -z "${TypeSrc}" ] || [ -z "${AccountSrc}" ] || [ -z "${ContainerSrc}" ] || [ -z "${RootpathSrc}" ] || \
 [ -z "${TypeDest}" -a ! -z "${AccountDest}" ]
 then
-    usage
+    usage "At least one mandatory flag missing. Closing."
 fi
 
 # If all dests are empty, exit
@@ -257,12 +264,18 @@ IFS=',' read -r -a AccountSrcVals <<< "$AccountSrc"
 IFS=',' read -r -a ContainerSrcVals <<< "$ContainerSrc"
 IFS=',' read -r -a RootpathSrcVals <<< "$RootpathSrc"
 
+# Make sure that there are not too many input values
+if [ "${#AccountSrcVals[@]}" -gt "$MAX_ARG_COUNT" ] || [ "${#ContainerSrcVals[@]}" -gt "$MAX_ARG_COUNT" ] || [ "${#RootpathSrcVals[@]}" -gt "$MAX_ARG_COUNT" ]
+then
+    usage "Too many entries specified. Closing."
+fi 
+
 # Make sure types and target are valid
 for item in "${TypeSrcVals[@]}"
 do
     if [ -z "${EndpointMap[${item}]}" -a ! "${item}" = "%" ]
     then
-        usage
+        usage "Invalid account type specified. Closing."
     fi
 done
 
@@ -279,7 +292,7 @@ elif [ "${Target}" = "SKEWED_COL_VALUE_LOC_MAP" ]
 then
     TargetAttrs=("${SKEWEDCOLVALUELOCMAPColumns[@]}")
 else
-    usage
+    usage "Invalid target specified. Closing."
 fi
 
 if [ ! -z "${TypeDest}" ]
@@ -433,7 +446,7 @@ EOF
 
 DisplayMigrationImpactString=$(cat <<-EOF
 
-select LocationUpdate.FK_ID, ${TargetAttrs[1]}, 
+select LocationUpdate.FK_ID as ID, ${TargetAttrs[1]} as oldLocation, 
 (
     SCHEMATYPE + 
     '://' + 
