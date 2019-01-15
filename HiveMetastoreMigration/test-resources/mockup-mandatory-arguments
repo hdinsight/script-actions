@@ -1,0 +1,10 @@
+--metastoreserver Server
+--metastoredatabase Database
+--metastoreuser Username
+--metastorepassword Password
+--typesrc abfs
+--accountsrc AccountSrc
+--containersrc ContainerSrc
+--pathsrc RootpathSrc
+--target SDS
+--queryclient beeline
